@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>org.paulgairing.jenkinsbranchmonitor</id>
     <name>Branch Monitor for Jenkins</name>
-    <vendor email="paul.gairing@pm.me" url="https://github.com/PaulG786/Jenkins-Branch-Monitor">Paul Gairing</vendor>
+    <vendor email="paul.gairing@pm.me" url="https://github.com/PaulG786/Jenkins-Branch-Monitor">PaulG786</vendor>
 
     <description><![CDATA[
         <p>See the Jenkins builds of <b>your</b> branches right in the IDE &mdash; no more hunting
