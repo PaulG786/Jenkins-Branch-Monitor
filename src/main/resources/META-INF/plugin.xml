@@ -1,0 +1,141 @@
+<idea-plugin>
+    <id>org.paulgairing.jenkinsbranchmonitor</id>
+    <name>Branch Monitor for Jenkins</name>
+    <vendor email="paul.gairing@pm.me">Paul Gairing</vendor>
+
+    <description><![CDATA[
+        <p>See the Jenkins builds of <b>your</b> branches right in the IDE &mdash; no more hunting
+        through Jenkins per repository and branch.</p>
+        <ul>
+            <li><b>Zero config discovery:</b> detects all Git roots and their checked-out branches and finds the
+                matching Jenkins multibranch jobs automatically (folders, encoded branch names, manual mapping as fallback).
+                Optionally also watches repositories whose VCS mapping is disabled or that are not registered in the IDE.
+                Single repositories can be excluded per project; a diagnostics view shows how the job URL is derived.</li>
+            <li><b>Compact table view:</b> status bubble (blue = building, green = success, red = failed,
+                yellow = unstable, gray = unknown), repository, branch, build number, result/time and your push state.
+                Columns can be hidden and sorted.</li>
+            <li><b>Follows your pushes:</b> pushed branches stay monitored after you switch branches.
+                You are notified when <i>your</i> build passes, breaks or turns green again &mdash;
+                builds triggered by others never spam you.</li>
+            <li><b>Build logs inside the IDE:</b> click a build to open its console log in a tool window tab with live tail,
+                error highlighting and "jump to next error" &mdash; or open the build in the browser.</li>
+            <li><b>Pull guard:</b> asks before you pull or update a branch whose Jenkins build is currently red
+                &mdash; pull anyway or cancel.</li>
+            <li><b>Status bar widget:</b> worst build state at a glance plus your push statistics per workspace
+                (pushes, green and red builds &mdash; own builds only).</li>
+            <li>Adaptive polling, API token stored in the IDE password safe.</li>
+        </ul>
+        <p><b>Strictly read-only:</b> the plugin only reads build status and logs via HTTP GET. It never
+        triggers, aborts, replays or modifies builds.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>0.3.1</h3>
+        <ul>
+            <li>Renamed to <i>Branch Monitor for Jenkins</i>.</li>
+            <li>Prepared for the JetBrains Marketplace (license, vendor, plugin verification).</li>
+        </ul>
+        <h3>0.3.0</h3>
+        <ul>
+            <li>New settings page <i>Branch Monitor for Jenkins › Repositories</i> (per project): overview of all Git repositories
+                found, with a checkbox to stop monitoring single repositories. Excluded repositories are also skipped by
+                the pull guard and the push statistics.</li>
+            <li>Diagnostics: shows the Git information (root, source, remote URL, branch) the job URL is derived from, and
+                <i>Check Job Resolution</i> lists every job URL that is tried &mdash; handy when no job is found.</li>
+        </ul>
+        <h3>0.2.9</h3>
+        <ul>
+            <li>Job discovery: if the folder is not derivable from the remote URL (e.g. repo <code>team/app</code> in folder
+                <code>TEAM-APPS</code>), jobs named like the repository are looked up in the Jenkins folder tree
+                (one read-only request, cached for 10 minutes; reset with Refresh).</li>
+        </ul>
+        <h3>0.2.8</h3>
+        <ul>
+            <li>Log viewer: just start typing to search the log (opens the regular IDE find bar with live highlighting);
+                also via the new <i>Find in Log</i> toolbar button.</li>
+        </ul>
+        <h3>0.2.7</h3>
+        <ul>
+            <li>Unmanaged Git roots now come entirely from the IDE's VCS root detection; branch and remote are read with the
+                IDE's Git executable instead of parsing <code>.git</code> files. Branch switches are noticed via VFS events.</li>
+            <li>Unregistered roots: nested repositories (e.g. inside <code>target/</code>), excluded/ignored folders and
+                roots outside the project content are skipped; duplicate clones of the same repo/branch are shown once.</li>
+            <li>Repository names from local/UNC remote paths are resolved correctly.</li>
+            <li>Plugin and tool window icon back to the Git branch logo.</li>
+        </ul>
+        <h3>0.2.6</h3>
+        <ul>
+            <li>Pull guard now also intercepts the <i>Update Selected</i> button of the Git tool window branches tree
+                (that toolbar creates its own action instance and bypassed the guard).</li>
+            <li>Pull guard decisions are logged to idea.log for troubleshooting.</li>
+        </ul>
+        <h3>0.2.5</h3>
+        <ul>
+            <li>Pull guard now also covers <i>Update Selected</i> in the Git tool window branches tree, <i>Update</i> in the
+                branch popup and <i>Pull into current using Rebase/Merge</i>.</li>
+            <li>Branches without a cached status (e.g. a non-current branch) are checked on demand (read-only, cancelable).</li>
+            <li>Unregistered Git roots are now found via the IDE's own VCS root detection.</li>
+        </ul>
+        <h3>0.2.4</h3>
+        <ul>
+            <li>Type in the build table to filter jobs (IntelliJ speed search).</li>
+            <li>Log/browser menu opens on right-click (or Shift+F10) only.</li>
+            <li>New binoculars icons.</li>
+        </ul>
+        <h3>0.2.3</h3>
+        <ul>
+            <li>New plugin icon and tool window icon.</li>
+        </ul>
+        <h3>0.2.2</h3>
+        <ul>
+            <li>Build logs are shown in a regular IDE console, so console plugins such as Grep Console apply to them as well.</li>
+        </ul>
+        <h3>0.2.1</h3>
+        <ul>
+            <li>Fix: build logs stayed empty.</li>
+            <li>Fix: log tabs can be closed again.</li>
+            <li>Table columns are as wide as their content.</li>
+        </ul>
+        <h3>0.2.0</h3>
+        <ul>
+            <li>New table view with separate columns (status, repository, branch, build, result, your push);
+                hide columns via right-click on the header, temporary sorting by clicking a header.</li>
+            <li>Click a build: show the log inside the IDE (live tail, error highlighting, errors-only filter,
+                full log in editor) or open build/job in the browser.</li>
+            <li>Pull guard: confirmation dialog before Git Pull / Update Project when the branch's build is red.</li>
+            <li>Status bar widget with worst state and your push statistics (moved out of the tool window).</li>
+            <li>Optional: also watch Git repositories with VCS mapping &lt;None&gt; or not registered in the IDE.</li>
+            <li>"Show Log" action in build notifications.</li>
+        </ul>
+        <h3>0.1.0</h3>
+        <ul>
+            <li>Initial version: automatic job discovery, push tracking, notifications for own pushes only.</li>
+        </ul>
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Jenkins Builds"
+                    anchor="bottom"
+                    secondary="true"
+                    canCloseContents="true"
+                    icon="/icons/jenkinsBuilds.svg"
+                    factoryClass="org.paulgairing.jenkinsbranchmonitor.ui.MonitorToolWindowFactory"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="org.paulgairing.jenkinsbranchmonitor.settings.SettingsConfigurable"
+                                 id="org.paulgairing.jenkinsbranchmonitor.settings"
+                                 displayName="Branch Monitor for Jenkins"/>
+        <projectConfigurable parentId="org.paulgairing.jenkinsbranchmonitor.settings"
+                             instance="org.paulgairing.jenkinsbranchmonitor.settings.RepositoriesConfigurable"
+                             id="org.paulgairing.jenkinsbranchmonitor.settings.repositories"
+                             displayName="Repositories"
+                             nonDefaultProject="true"/>
+        <notificationGroup id="Branch Monitor for Jenkins" displayType="BALLOON"/>
+        <postStartupActivity implementation="org.paulgairing.jenkinsbranchmonitor.PluginStartup"/>
+        <statusBarWidgetFactory id="JenkinsBranchMonitor.StatusWidget"
+                                implementation="org.paulgairing.jenkinsbranchmonitor.ui.JenkinsStatusWidgetFactory"
+                                order="before Position"/>
+    </extensions>
+</idea-plugin>
