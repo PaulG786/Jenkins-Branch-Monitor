@@ -60,5 +60,5 @@ Settings → Tools → **Branch Monitor for Jenkins**: server URL, username, API
 
 ## Concept
 
-See [docs/KONZEPT.md](docs/KONZEPT.md) for the full concept including roadmap
-(status bar widget, recently-pushed-branch tracking, marketplace publishing).
+The original design notes (German) are in [docs/KONZEPT.md](docs/KONZEPT.md) and
+[docs/KONZEPT-0.2.md](docs/KONZEPT-0.2.md).

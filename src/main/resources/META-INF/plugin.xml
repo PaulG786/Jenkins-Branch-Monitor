@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>org.paulgairing.jenkinsbranchmonitor</id>
     <name>Branch Monitor for Jenkins</name>
-    <vendor email="paul.gairing@pm.me">Paul Gairing</vendor>
+    <vendor email="paul.gairing@pm.me" url="https://github.com/PaulG786/Jenkins-Branch-Monitor">Paul Gairing</vendor>
 
     <description><![CDATA[
         <p>See the Jenkins builds of <b>your</b> branches right in the IDE &mdash; no more hunting
@@ -17,7 +17,7 @@
             <li><b>Follows your pushes:</b> pushed branches stay monitored after you switch branches.
                 You are notified when <i>your</i> build passes or turns green again &mdash; and a dialog pops up when it breaks &mdash;
                 builds triggered by others never spam you.</li>
-            <li><b>Build logs inside the IDE:</b> click a build to open its console log in a tool window tab with live tail,
+            <li><b>Build logs inside the IDE:</b> right-click a build to open its console log in a tool window tab with live tail,
                 error highlighting and "jump to next error" &mdash; or open the build in the browser.</li>
             <li><b>Pull guard:</b> asks before you pull or update a branch whose Jenkins build is currently red
                 &mdash; pull anyway or cancel.</li>
