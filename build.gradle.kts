@@ -6,7 +6,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.6.0"
 }
 
-group = "org.paulgairing"
+group = "org.paulg786"
 version = "0.3.2"
 
 repositories {
@@ -25,7 +25,7 @@ dependencies {
 
 intellijPlatform {
     pluginConfiguration {
-        id = "org.paulgairing.jenkinsbranchmonitor"
+        id = "org.paulg786.jenkinsbranchmonitor"
         name = "Branch Monitor for Jenkins"
         version = project.version.toString()
         ideaVersion {

@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>org.paulgairing.jenkinsbranchmonitor</id>
+    <id>org.paulg786.jenkinsbranchmonitor</id>
     <name>Branch Monitor for Jenkins</name>
-    <vendor email="paul.gairing@pm.me" url="https://github.com/PaulG786/Jenkins-Branch-Monitor">PaulG786</vendor>
+    <vendor url="https://github.com/PaulG786/Jenkins-Branch-Monitor">PaulG786</vendor>
 
     <description><![CDATA[
         <p>See the Jenkins builds of <b>your</b> branches right in the IDE &mdash; no more hunting
@@ -127,20 +127,20 @@
                     secondary="true"
                     canCloseContents="true"
                     icon="/icons/jenkinsBuilds.svg"
-                    factoryClass="org.paulgairing.jenkinsbranchmonitor.ui.MonitorToolWindowFactory"/>
+                    factoryClass="org.paulg786.jenkinsbranchmonitor.ui.MonitorToolWindowFactory"/>
         <applicationConfigurable parentId="tools"
-                                 instance="org.paulgairing.jenkinsbranchmonitor.settings.SettingsConfigurable"
-                                 id="org.paulgairing.jenkinsbranchmonitor.settings"
+                                 instance="org.paulg786.jenkinsbranchmonitor.settings.SettingsConfigurable"
+                                 id="org.paulg786.jenkinsbranchmonitor.settings"
                                  displayName="Branch Monitor for Jenkins"/>
-        <projectConfigurable parentId="org.paulgairing.jenkinsbranchmonitor.settings"
-                             instance="org.paulgairing.jenkinsbranchmonitor.settings.RepositoriesConfigurable"
-                             id="org.paulgairing.jenkinsbranchmonitor.settings.repositories"
+        <projectConfigurable parentId="org.paulg786.jenkinsbranchmonitor.settings"
+                             instance="org.paulg786.jenkinsbranchmonitor.settings.RepositoriesConfigurable"
+                             id="org.paulg786.jenkinsbranchmonitor.settings.repositories"
                              displayName="Repositories"
                              nonDefaultProject="true"/>
         <notificationGroup id="Branch Monitor for Jenkins" displayType="BALLOON"/>
-        <postStartupActivity implementation="org.paulgairing.jenkinsbranchmonitor.PluginStartup"/>
+        <postStartupActivity implementation="org.paulg786.jenkinsbranchmonitor.PluginStartup"/>
         <statusBarWidgetFactory id="JenkinsBranchMonitor.StatusWidget"
-                                implementation="org.paulgairing.jenkinsbranchmonitor.ui.JenkinsStatusWidgetFactory"
+                                implementation="org.paulg786.jenkinsbranchmonitor.ui.JenkinsStatusWidgetFactory"
                                 order="before Position"/>
     </extensions>
 </idea-plugin>
