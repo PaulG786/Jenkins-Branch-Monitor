@@ -15,7 +15,7 @@
                 yellow = unstable, gray = unknown), repository, branch, build number, result/time and your push state.
                 Columns can be hidden and sorted.</li>
             <li><b>Follows your pushes:</b> pushed branches stay monitored after you switch branches.
-                You are notified when <i>your</i> build passes, breaks or turns green again &mdash;
+                You are notified when <i>your</i> build passes or turns green again &mdash; and a dialog pops up when it breaks &mdash;
                 builds triggered by others never spam you.</li>
             <li><b>Build logs inside the IDE:</b> click a build to open its console log in a tool window tab with live tail,
                 error highlighting and "jump to next error" &mdash; or open the build in the browser.</li>
@@ -30,6 +30,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <h3>0.3.2</h3>
+        <ul>
+            <li>The first red build after your push now opens a dialog (Show Log / Open in Browser / Close) instead of
+                an easily missed balloon. Further failing rebuilds of the same push stay quiet.</li>
+        </ul>
         <h3>0.3.1</h3>
         <ul>
             <li>Renamed to <i>Branch Monitor for Jenkins</i>.</li>

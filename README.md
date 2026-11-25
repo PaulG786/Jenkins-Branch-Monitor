@@ -6,7 +6,7 @@ currently checked out in your project — no more manual Jenkins browsing per re
 **Strictly read-only:** the plugin only reads build status and logs via HTTP GET.
 It never triggers, aborts, replays or modifies builds.
 
-## Features (0.2.0)
+## Features
 
 - Detects all Git roots of the project and their checked-out branches (live on checkout).
   Optionally also repositories whose VCS mapping is `<None>` or that are not registered in the IDE
@@ -26,7 +26,8 @@ It never triggers, aborts, replays or modifies builds.
 - **Log viewer** as tool window tab (a regular IDE console, so plugins like *Grep Console* apply): live tail for running builds, error highlighting, previous/next error, **type to search** (opens the IDE find bar),
   errors-only filter, "Open Full Log in Editor" for big logs (default limit 2 MB in the tab).
 - **Push tracking:** pushed branches stay monitored after switching branches; notifications only for
-  *your* pushes (passed / broke / green again), with *Show Log* action.
+  *your* pushes (passed / green again), with *Show Log* action. The first red build after a push opens a
+  dialog (*Show Log* / *Open in Browser* / *Close*); further failing rebuilds of that push stay quiet.
 - **Pull guard:** confirmation dialog ("Pull Anyway" / "Cancel") before *Git Pull*, *Update Project*, *Update Selected*
   (Git tool window / branch popup) and *Pull into current* when the affected branch's Jenkins build is red (other
   people's builds count here). Branches without a cached status are checked on demand. Terminal pulls are not intercepted.

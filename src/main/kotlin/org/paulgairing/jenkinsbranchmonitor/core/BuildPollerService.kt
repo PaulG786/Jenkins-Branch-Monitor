@@ -51,6 +51,9 @@ class BuildPollerService(private val project: Project) : Disposable {
     private val headWatcher: ScheduledFuture<*>
     private val phaseMemory = HashMap<String, PushPhase>()
 
+    /** Pushes ("repo/branch|pushedAt") whose first red build was already announced with the popup. */
+    private val failAlerted = HashSet<String>()
+
     init {
         project.messageBus.connect(this).subscribe(
             GitRepository.GIT_REPO_CHANGE,
@@ -180,13 +183,15 @@ class BuildPollerService(private val project: Project) : Disposable {
             val key = s.branch.displayName
             if (s.pushPhase == PushPhase.NONE) {
                 phaseMemory.remove(key)
+                failAlerted.removeIf { it.startsWith("$key|") }
                 continue
             }
             val prev = phaseMemory[key] ?: PushPhase.NONE
             when {
                 s.pushPhase == PushPhase.BROKEN && prev != PushPhase.BROKEN -> {
                     stats.redRecorded()
-                    BuildNotifier.buildFailed(project, s)
+                    // Popup only for the first red build after a push — rebuilds that fail again stay quiet.
+                    if (failAlerted.add("$key|${s.branch.pushedAt}")) BuildNotifier.buildFailed(project, s)
                 }
                 s.pushPhase == PushPhase.DONE && prev != PushPhase.DONE -> {
                     tracker.markDone(s.branch.repoName, s.branch.branch ?: "")
